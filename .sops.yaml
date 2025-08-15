@@ -1,0 +1,23 @@
+---
+keys:
+  - &ajquack age1n50gn375hw4zldle7s4w00zqa9htwrg3eq2jxnn3g57pjcutw5uqxwdnqn
+  - &flux age14c5pysj06j6dd5wpvmxh05gsgmvj0gm27qfrelhj8decavrlkuus95lcmu
+
+creation_rules:
+  - path_regex: kubernetes/.*/talos/.*\.sops\.ya?ml$
+    key_groups:
+      - age:
+          - *ajquack
+          - *flux
+
+  - path_regex: kubernetes/.*\.sops\.ya?ml$
+    encrypted_regex: "^(data|stringData)$"
+    key_groups:
+      - age:
+          - *ajquack
+          - *flux
+
+  - path_regex: .*\.sops\.ya?ml$
+    key_groups:
+      - age:
+          - *flux

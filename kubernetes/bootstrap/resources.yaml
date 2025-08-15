@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: external-secrets
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: infisical-secret
+  namespace: external-secrets
+stringData:
+  clientId: ${INFISICAL_CLIENT_ID}
+  clientSecret: ${INFISICAL_CLIENT_SECRET}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: flux-system
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sops-age
+  namespace: flux-system
+stringData:
+  age.agekey: ${FLUX_SOPS_PRIVATE_KEY}

@@ -1,0 +1,12 @@
+---
+machine:
+  install:
+    diskSelector:
+      model: EAGET SSD 512GB
+  network:
+    hostname: alpha.k8s.internal
+    interfaces:
+      - interface: enp1s0
+        dhcp: true
+        vip:
+          ip: 172.16.1.230

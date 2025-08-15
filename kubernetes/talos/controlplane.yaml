@@ -1,0 +1,110 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/siderolabs/talos/refs/heads/release-1.10/website/content/v1.10/schemas/config.schema.json
+version: v1alpha1
+machine:
+  ca:
+    crt: $MACHINE_CA_CRT
+    key: $MACHINE_CA_KEY
+  features:
+    apidCheckExtKeyUsage: true
+    diskQuotaSupport: true
+    hostDNS:
+      enabled: true
+      forwardKubeDNSToHost: false
+      resolveMemberNames: true
+    kubePrism:
+      enabled: true
+      port: 7445
+    kubernetesTalosAPIAccess:
+      enabled: true
+      allowedRoles:
+        - os:admin
+      allowedKubernetesNamespaces:
+        - actions-runner-system
+        - system-upgrade
+    rbac: true
+    stableHostname: true
+  install:
+    image: factory.talos.dev/metal-installer/2d61dd07b20062062ea671b4d01873506103b67c0f7a4c3fb6cf4ee85585dcb8:v1.10.6
+  kubelet:
+    defaultRuntimeSeccompProfileEnabled: true
+    disableManifestsDirectory: true
+    extraArgs:
+      rotate-server-certificates: "true"
+    extraConfig:
+      maxPods: 150
+      serializeImagePulls: false
+    image: ghcr.io/siderolabs/kubelet:v1.33.3
+    nodeIP:
+      validSubnets:
+        - 172.16.1.0/24
+  network:
+    disableSearchDomain: true
+    extraHostEntries:
+      - ip: 172.16.1.230
+        aliases:
+          - api.k8s.internal
+  token: $MACHINE_TOKEN
+  type: controlplane
+cluster:
+  aggregatorCA:
+    crt: $CLUSTER_AGGREGATORCA_CRT
+    key: $CLUSTER_AGGREGATORCA_KEY
+  allowSchedulingOnControlPlanes: true
+  apiServer:
+    image: registry.k8s.io/kube-apiserver:v1.33.3
+    extraArgs:
+      enable-aggregator-routing: "true"
+      feature-gates: MutatingAdmissionPolicy=true
+      runtime-config: admissionregistration.k8s.io/v1alpha1=true
+    certSANs:
+      - api.k8s.internal
+      - 172.16.1.230
+      - 127.0.0.1 # KubePrism
+    disablePodSecurityPolicy: true
+  ca:
+    crt: $CLUSTER_CA_CRT
+    key: $CLUSTER_CA_KEY
+  controllerManager:
+    image: registry.k8s.io/kube-controller-manager:v1.33.3
+    extraArgs:
+      bind-address: 0.0.0.0
+  controlPlane:
+    endpoint: https://api.k8s.internal:6443
+  coreDNS:
+    disabled: true
+  clusterName: main
+  discovery:
+    enabled: true
+    registries:
+      kubernetes:
+        disabled: true
+      service:
+        disabled: false
+  etcd:
+    advertisedSubnets:
+      - 172.16.1.0/24
+    ca:
+      crt: $CLUSTER_ETCD_CA_CRT
+      key: $CLUSTER_ETCD_CA_KEY
+    extraArgs:
+      listen-metrics-urls: http://0.0.0.0:2381
+  id: $CLUSTER_ID
+  network:
+    cni:
+      name: none
+    dnsDomain: cluster.local
+    podSubnets:
+      - 10.244.0.0/16
+    serviceSubnets:
+      - 10.96.0.0/12
+  proxy:
+    disabled: true
+    image: registry.k8s.io/kube-proxy:v1.33.3
+  scheduler:
+    image: registry.k8s.io/kube-scheduler:v1.33.3
+  secret: $CLUSTER_SECRET
+  secretboxEncryptionSecret: $CLUSTER_SECRETBOXENCRYPTIONSECRET
+  serviceAccount:
+    key: $CLUSTER_SERVICEACCOUNT_KEY
+  token: $CLUSTER_TOKEN

@@ -1,0 +1,10 @@
+---
+image:
+  repository: ghcr.io/external-secrets/external-secrets
+installCRDs: true
+certController:
+  image:
+    repository: ghcr.io/external-secrets/external-secrets
+webhook:
+  image:
+    repository: ghcr.io/external-secrets/external-secrets

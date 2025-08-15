@@ -1,0 +1,19 @@
+# MacOS & Win files
+.DS_Store
+Thumbs.db
+
+# SOPS
+.decrypted~*
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*tfplan*
+
+# Kubernetes & Talos
+kubeconfig
+talosconfig
+
+# File extensions
+*.iso
