@@ -1,0 +1,12 @@
+apiVersion: cilium.io/v2
+kind: CiliumBGPPeerConfig
+metadata:
+  name: cilium-peer-router
+spec:
+  gracefulRestart:
+    enabled: true
+    restartTimeSeconds: 120
+  timers:
+    connectRetryTimeSeconds: 120
+    holdTimeSeconds: 90
+    keepAliveTimeSeconds: 30
