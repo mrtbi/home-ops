@@ -9,12 +9,13 @@ gatewayAPI:
   enableAlpn: true
   xffNumTrustedHops: 1
 ipam:
-  mode: "kubernetes"
+  mode: kubernetes
 k8sServiceHost: 127.0.0.1
 k8sServicePort: 7445
 kubeProxyReplacement: true
 operator:
   replicas: 1
+routingMode: native
 securityContext:
   capabilities:
     ciliumAgent:
