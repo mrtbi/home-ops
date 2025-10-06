@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: workloads
 resources:
   - ./it-tools/ks.yaml
+  - ./unifi/ks.yaml
 components:
   - ../../components/namespace
   - ../../components/flux/alerts
