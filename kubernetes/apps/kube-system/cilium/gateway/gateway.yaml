@@ -27,4 +27,4 @@ spec:
       tls:
         certificateRefs:
           - kind: Secret
-            name: apps-mrtb-io-tls
+            name: mrtb-io-tls
