@@ -4,6 +4,7 @@ cgroup:
   autoMount:
     enabled: false
   hostRoot: /sys/fs/cgroup
+devices: enp1s0
 gatewayAPI:
   enabled: true
   enableAlpn: true
