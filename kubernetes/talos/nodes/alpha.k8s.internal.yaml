@@ -10,3 +10,19 @@ machine:
         dhcp: true
         vip:
           ip: 172.16.1.230
+---
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+provisioning:
+  maxSize: 80GiB
+---
+# user-volume.patch.yaml
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: PERSISTENT
+provisioning:
+  diskSelector:
+    match: system_disk
+  minSize: 100GiB
+  grow: true
