@@ -14,3 +14,6 @@ spec:
         name: cert-manager-webhook-hetzner
       version:  1.4.0
   interval: 30m
+  values:
+    secretName:
+    - hetzner-webhook-secret
