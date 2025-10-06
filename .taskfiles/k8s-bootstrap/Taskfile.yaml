@@ -27,7 +27,7 @@ tasks:
       - test -f {{.K8S_DIR}}/bootstrap/resources.yaml
       - infisical user get token --silent
       - talosctl config info
-      - talosctl --nodes {{.RANDOM_CONTROLLER}} get machineconfig
+      #- talosctl --nodes {{.RANDOM_CONTROLLER}} get machineconfig
     env:
       RANDOM_CONTROLLER:
         sh: talosctl config info --output json | jq --raw-output '.endpoints[]' | sort -R | head -n 1

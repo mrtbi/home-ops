@@ -10,3 +10,9 @@ spec:
     connectRetryTimeSeconds: 120
     holdTimeSeconds: 90
     keepAliveTimeSeconds: 30
+  families:
+    - afi: ipv4
+      safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: "bgp"

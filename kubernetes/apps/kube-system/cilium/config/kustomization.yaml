@@ -6,3 +6,4 @@ resources:
   - ./bgpippool.yaml
   - ./bgpclusterconfig.yaml
   - ./bgppeerconfig.yaml
+  - ./bgpadvertisement.yaml
