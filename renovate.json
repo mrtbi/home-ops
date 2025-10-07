@@ -1,6 +1,19 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
     "config:recommended"
-  ]
+    "github>mrtbi/renovate-config",
+    "github>mrtbi/home-ops//.renovate/overrides.json5",
+    "github>mrtbi/home-ops//.renovate/groups.json5",
+    "github>mrtbi/home-ops//.renovate/customManagers.json5",
+  ],
+  flux: {
+    managerFilePatterns: ["/^kubernetes/.+\\.yaml(?:\\.j2)?$/"],
+  },
+  "helm-values": {
+    managerFilePatterns: ["/^kubernetes/.+\\.yaml(?:\\.j2)?$/"],
+  },
+  kubernetes: {
+    managerFilePatterns: ["/^kubernetes/.+\\.yaml(?:\\.j2)?$/"],
+  },
 }
