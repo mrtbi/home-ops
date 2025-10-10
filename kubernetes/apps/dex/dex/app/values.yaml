@@ -3,3 +3,10 @@ configSecret:
   name: dex-config
 deploymentAnnotations:
   reloader.stakater.com/auto: "true"
+volumes:
+  - name: dex-db
+    persistentVolumeClaim:
+      claimName: dex-db-pvc
+volumeMounts:
+  - name: dex-db
+    mountPath: /var/dex
