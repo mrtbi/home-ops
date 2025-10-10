@@ -6,7 +6,7 @@ deploymentAnnotations:
 volumes:
   - name: dex-db
     persistentVolumeClaim:
-      claimName: dex-db-pvc
+      claimName: dex-data
 volumeMounts:
   - name: dex-db
     mountPath: /var/dex
