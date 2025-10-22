@@ -11,9 +11,6 @@ spec:
       interval: 30m
       sourceRef:
         kind: HelmRepository
-        name: cert-manager-webhook-hetzner
+        name: hcloud
       version:  1.4.0
   interval: 30m
-  values:
-    secretName:
-    - hetzner-webhook-secret

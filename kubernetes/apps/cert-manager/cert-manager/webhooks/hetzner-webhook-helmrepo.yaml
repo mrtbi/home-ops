@@ -3,8 +3,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: cert-manager-webhook-hetzner
+  name: hcloud
   namespace: cert-manager
 spec:
   interval: 30m
-  url: https://vadimkim.github.io/cert-manager-webhook-hetzner
+  url: https://charts.hetzner.cloud

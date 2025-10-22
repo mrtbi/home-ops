@@ -1,18 +1,18 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt-production
+  name: hetzner-dns01
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt-production
+      name: hetzner-dns01-account-key
     solvers:
       - dns01:
           webhook:
-            groupName: hetzner.cert-mananger-webhook.noshoes.xyz
             solverName: hetzner
+            groupName: acme.hetzner.com
             config:
-              secretName: hetzner-webhook-secret
-              zoneName: mrtb.io
-              apiUrl: https://dns.hetzner.com/api/v1
+              tokenSecretKeyRef:
+                name: hetzner-webhook-secret
+                key: token
