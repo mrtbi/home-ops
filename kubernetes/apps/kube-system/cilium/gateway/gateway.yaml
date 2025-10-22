@@ -4,6 +4,8 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: gateway
+  annotations:
+    cert-manager.io/issuer: letsencrypt-prod
 spec:
   gatewayClassName: cilium
   listeners:
@@ -25,3 +27,21 @@ spec:
         certificateRefs:
           - kind: Secret
             name: mrtb-io-tls
+    - name: http-dev
+      protocol: HTTP
+      port: 80
+      hostname: "*.dev.mrtb.io"
+      allowedRoutes:
+        namespaces:
+          from: All
+    - name: https-dev
+      protocol: HTTPS
+      port: 443
+      hostname: "*.dev.mrtb.io"
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        certificateRefs:
+          - kind: Secret
+            name: dev-mrtb-io-tls
