@@ -26,8 +26,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/mrtbi/code-server-go:4.105.1
-              tag: sha256:41076604bd48b64be9166101047e6952842de10773fbb466887d6617b60c192e 
+              repository: ghcr.io/mrtbi/code-server-go
+              tag: 4.105.1@sha256:41076604bd48b64be9166101047e6952842de10773fbb466887d6617b60c192e 
             resources:
               requests:
                 cpu: 100m
