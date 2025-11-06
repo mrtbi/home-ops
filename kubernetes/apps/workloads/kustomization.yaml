@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: workloads
 resources:
   - ./code-server/ks.yaml
+  - ./glance/ks.yaml
   - ./it-tools/ks.yaml
   - ./karakeep/ks.yaml
   - ./n8n/ks.yaml
