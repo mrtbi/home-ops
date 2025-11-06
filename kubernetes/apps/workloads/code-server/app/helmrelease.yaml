@@ -46,9 +46,7 @@ spec:
             port: &port 8080
     persistence:
       data:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 10Gi
+        existingClaim: code-server-data
         advancedMounts:
           code-server:
             app:
