@@ -53,7 +53,7 @@ spec:
         advancedMounts:
           glance:
             app:
-              - path: /app/config/glance.yaml
+              - path: /app/config
                 readOnly: true
                 subPath: glance.yml
       home:
@@ -62,7 +62,7 @@ spec:
         advancedMounts:
           glance:
             app:
-              - path: /app/config/home.yaml
+              - path: /app/config
                 readOnly: true
                 subPath: home.yml
       assests:
