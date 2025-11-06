@@ -57,9 +57,7 @@ spec:
             port: *port
     persistence:
       data:
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 20Gi
+        existingClaim: n8n-data
         advancedMounts:
           n8n:
             app:
