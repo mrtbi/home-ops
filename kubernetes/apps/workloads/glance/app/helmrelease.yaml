@@ -55,16 +55,6 @@ spec:
             app:
               - path: /app/config
                 readOnly: true
-                subPath: glance.yml
-      home:
-        type: configMap
-        name: glance-home-config
-        advancedMounts:
-          glance:
-            app:
-              - path: /app/config
-                readOnly: true
-                subPath: home.yml
       assests:
         type: persistentVolumeClaim
         size: 256Mi
