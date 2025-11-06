@@ -46,10 +46,32 @@ spec:
         ports:
           http:
             port: &port 8080
-    configMapsFromFolder:
-      enabled: true
-      autoDetectBinary: false
-      basePath: files/configMaps
+    persistence:
+      config:
+        type: configMap
+        name: glance-config
+        advancedMounts:
+          glance:
+            app:
+              - path: /app/config
+                readOnly: true
+      home:
+        type: configMap
+        name: glance-home-config
+        advancedMounts:
+          glance:
+            app:
+              - path: /app/config
+                readOnly: true
+      assests:
+        type: persistentVolumeClaim
+        size: 256Mi
+        storageClass: openebs-hostpath
+        accessMode: ReadWriteOnce
+        advancedMounts:
+          glance:
+            app:
+              - path: /app/assets
     route:
       app:
         hostnames:
