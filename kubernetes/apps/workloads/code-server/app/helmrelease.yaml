@@ -27,7 +27,7 @@ spec:
           app:
             image:
               repository: ghcr.io/mrtbi/code-server-go
-              tag: 4.105.1@sha256:41076604bd48b64be9166101047e6952842de10773fbb466887d6617b60c192e 
+              tag: sandbox@sha256:b1f57991a327d3e5bde2aab5ac01de17b9c2e7831a7e5d1bc83cb1248436f238
             resources:
               requests:
                 cpu: 100m
