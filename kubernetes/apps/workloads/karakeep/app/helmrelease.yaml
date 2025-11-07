@@ -154,5 +154,5 @@ spec:
             sectionName: https
         rules:
           - backendRefs:
-              - name: karakeep 
+              - name: karakeep-app
                 port: *httpPort
