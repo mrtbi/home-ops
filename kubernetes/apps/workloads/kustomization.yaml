@@ -9,6 +9,7 @@ resources:
   - ./it-tools/ks.yaml
   - ./karakeep/ks.yaml
   - ./n8n/ks.yaml
+  - ./scraperr/ks.yaml
   - ./unifi/ks.yaml
 components:
   - ../../components/namespace
