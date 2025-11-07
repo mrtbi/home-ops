@@ -14,3 +14,12 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: scraperr
+  values:
+    scrapperApi:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: scraperr-data-pvc
+        - name: media
+          persistentVolumeClaim:
+            claimName: scraperr-media-pvc
