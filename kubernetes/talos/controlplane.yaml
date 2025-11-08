@@ -54,9 +54,14 @@ cluster:
   apiServer:
     image: registry.k8s.io/kube-apiserver:v1.33.5
     extraArgs:
+      authentication-config: /system/config/kubernetes/authenticationconfiguration.yaml
       enable-aggregator-routing: "true"
       feature-gates: MutatingAdmissionPolicy=true
       runtime-config: admissionregistration.k8s.io/v1alpha1=true
+    extraVolumes:
+      - hostPath: /var/kubernetes/authenticationconfiguration.yaml
+        mountPath: /system/config/kubernetes/authenticationconfiguration.yaml
+        readonly: true
     certSANs:
       - api.k8s.internal
       - 172.16.1.230

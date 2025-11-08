@@ -2,7 +2,7 @@
 machine:
   install:
     diskSelector:
-      model: EAGET SSD 512GB
+      model: TS240GMTS420S
   network:
     hostname: alpha.k8s.internal
     interfaces:
@@ -10,6 +10,28 @@ machine:
         dhcp: true
         vip:
           ip: 172.16.1.230
+  files:
+    - content: |
+        apiVersion: apiserver.config.k8s.io/v1beta1
+        kind: AuthenticationConfiguration
+        jwt:
+        - issuer:
+            url: https://auth.mrtb.io
+            audiences:
+            - Ov23liaN3sS64jTqfBT0
+          claimMappings:
+            username:
+              claim: preferred_username
+              prefix: "oidc:"
+            groups:
+              claim: groups
+              prefix: "oidc:"
+          userValidationRules:
+          - expression: "!user.username.startsWith('system:')"
+            message: "username cannot use reserved system: prefix"
+      permissions: 0o644
+      path: /var/kubernetes/authenticationconfiguration.yaml
+      op: create
 ---
 apiVersion: v1alpha1
 kind: VolumeConfig
