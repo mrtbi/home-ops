@@ -61,7 +61,7 @@ spec:
         accessMode: ReadWriteOnce
         size: 10Gi
         advancedMounts:
-          n8n:
+          papra:
             app:
               - path: /app/app-data
     route:
