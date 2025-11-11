@@ -60,7 +60,7 @@ spec:
                 enabled: true
             resources:
               requests:
-                cpu: 10m
+                cpu: 500m
               limits:
                 memory: 1Gi
       chrome:
@@ -87,7 +87,7 @@ spec:
                   - ALL
             resources:
               requests:
-                cpu: 10m
+                cpu: 100m
               limits:
                 memory: 1Gi
       meilisearch:
@@ -110,7 +110,7 @@ spec:
                     key: KARAKEEP_MEILI_MASTER_KEY
             resources:
               requests:
-                cpu: 10m
+                cpu: 100m
               limits:
                 memory: 1Gi
     service:
