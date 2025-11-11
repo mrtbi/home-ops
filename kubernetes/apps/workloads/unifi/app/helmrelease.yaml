@@ -11,10 +11,6 @@ spec:
     name: app-template
     namespace: flux-system
   values:
-    defaultPodOptions:
-      annotations:
-          k8sup.io/backupcommand: "/bin/sh -c 'rm -rf autobackups.tar.gz && tar -czf autobackups.tar.gz /unifi/data/backup/autobackup'"
-          k8up.io/file-extension: ".tar.gz"
     controllers:
       unifi:
         replicas: 1
@@ -71,7 +67,7 @@ spec:
     persistence:
       data:
         annotations:
-          k8up.io/backup: "false"
+          k8up.io/backup: "true"
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 5Gi
