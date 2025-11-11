@@ -56,6 +56,8 @@ spec:
               - path: /app/config
                 readOnly: true
       assests:
+        annotations:
+          k8up.io/backup: "true"
         type: persistentVolumeClaim
         size: 256Mi
         storageClass: openebs-hostpath

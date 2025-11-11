@@ -132,6 +132,8 @@ spec:
             port: 7700
     persistence:
       data:
+        annotations:
+          k8up.io/backup: "true"
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 20Gi

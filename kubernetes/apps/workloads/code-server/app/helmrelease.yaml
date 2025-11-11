@@ -46,6 +46,8 @@ spec:
             port: &port 8080
     persistence:
       data:
+        annotations:
+          k8up.io/backup: "true"
         type: persistentVolumeClaim
         accessMode: ReadWriteOnce
         size: 10Gi
