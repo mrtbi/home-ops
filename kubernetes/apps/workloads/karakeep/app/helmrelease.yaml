@@ -112,7 +112,7 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 4Gi
+                memory: 1Gi
     service:
       app:
         primary: true
@@ -140,6 +140,13 @@ spec:
             app:
               - path: /data
                 subPath: karakeep
+      index:
+        annotations:
+          k8up.io/backup: "false"
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 1Gi
+        advancedMounts:
           meilisearch:
             app:
               - path: /meili_data
