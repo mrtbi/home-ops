@@ -35,6 +35,7 @@ spec:
                   secretKeyRef:
                     name: papra-secret
                     key: encryptionkey
+              TRUSTED_ORIGINS: "https://docs.mrtb.io"
             resources:
               requests:
                 cpu: 100m
