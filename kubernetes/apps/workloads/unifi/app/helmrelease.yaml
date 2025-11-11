@@ -17,6 +17,8 @@ spec:
         strategy: Recreate
         annotations:
           reloader.stakater.com/auto: "true"
+          k8sup.io/backupcommand: "/bin/sh -c 'rm -rf autobackups.tar.gz && tar -czf autobackups.tar.gz /unifi/data/backup/autobackup'"
+          k8up.io/file-extension: ".tar.gz"
         pod:
           securityContext:
             runAsUser: 999
