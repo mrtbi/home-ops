@@ -3,8 +3,8 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &appname k8up
-  namespace: &namespace system
+  name: &appname backup-schedules
+  namespace: &namespace workloads
 spec:
   targetNamespace: *namespace
   commonMetadata:
@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *appname
   interval: 30m
   timeout: 5m
-  path: "./kubernetes/apps/system/k8up/app"
+  path: "./kubernetes/apps/workloads/backup/schedules"
   prune: true
   sourceRef:
     kind: GitRepository

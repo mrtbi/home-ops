@@ -2,7 +2,6 @@ apiVersion: k8up.io/v1
 kind: Schedule
 metadata:
   name: backup-workload-pvcs
-  namespace: workloads
 spec:
   backup:
     schedule: '0 */6 * * *'
