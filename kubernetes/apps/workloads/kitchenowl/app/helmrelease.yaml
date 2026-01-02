@@ -1,0 +1,91 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kitchenowl
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+    namespace: flux-system
+  values:
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
+    controllers:
+      kitchenowl-web:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: tombursch/kitchenowl-web
+              tag: v0.7.4@sha256:70c4af1d2167fa29c3809e666a8307c279f31f869ec264e7866bea8979c808d0
+            env:
+              BACK_URL: kitchenowl-back.workloads.svc.cluster.local:5000
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 512Mi
+      kitchenowl-back:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: tombursch/kitchenowl-backend
+              tag: v0.7.4@sha256:c252c958a1f0709c22225996c8fc70b9cbe6d2b1f4676010bfcb0f3bbdd5b523
+            env:
+              JWT_SECRET_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: kitchenowl-secret
+                    key: jwt-secret-key
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 512Mi
+    service:
+      web:
+        primary: true
+        controller: kitchenowl-web
+        ports:
+          http:
+            port: &httpPort 80
+      back:
+        controller: kitchenowl-back
+        ports:
+          tcp:
+            port: 5000
+    persistence:
+      data:
+        annotations:
+          k8up.io/backup: "true"
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 5Gi
+        advancedMounts:
+          kitchenowl-back:
+            app:
+              - path: /data
+                subPath: kitchenowl
+    route:
+      app:
+        hostnames:
+          - kitchen.mrtb.io
+        parentRefs:
+          - name: gateway 
+            namespace: kube-system
+            sectionName: https
+        rules:
+          - backendRefs:
+              - name: kitchenowl-web
+                port: *httpPort
