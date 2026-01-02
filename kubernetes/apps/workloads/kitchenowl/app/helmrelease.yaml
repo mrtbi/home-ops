@@ -11,13 +11,6 @@ spec:
     name: app-template
     namespace: flux-system
   values:
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        runAsNonRoot: true
-        fsGroup: 1000
-        fsGroupChangePolicy: "OnRootMismatch"
     controllers:
       kitchenowl-web:
         annotations:
@@ -25,23 +18,8 @@ spec:
         containers:
           app:
             image:
-              repository: tombursch/kitchenowl-web
-              tag: v0.7.4@sha256:70c4af1d2167fa29c3809e666a8307c279f31f869ec264e7866bea8979c808d0
-            env:
-              BACK_URL: kitchenowl-back.workloads.svc.cluster.local:5000
-            resources:
-              requests:
-                cpu: 100m
-              limits:
-                memory: 512Mi
-      kitchenowl-back:
-        annotations:
-          reloader.stakater.com/auto: "true"
-        containers:
-          app:
-            image:
-              repository: tombursch/kitchenowl-backend
-              tag: v0.7.4@sha256:c252c958a1f0709c22225996c8fc70b9cbe6d2b1f4676010bfcb0f3bbdd5b523
+              repository: tombursch/kitchenowl
+              tag: v0.7.4@sha256:9d5e4402c2abc734e1536586caa103840a7ebe961fdce1570e31b956abeba70b
             env:
               JWT_SECRET_KEY:
                 valueFrom:
@@ -52,34 +30,15 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 512Mi
+                memory: 1Gi
     service:
       web:
         primary: true
         controller: kitchenowl-web
         ports:
           http:
-            port: &httpPort 80
-      back:
-        controller: kitchenowl-back
-        ports:
-          tcp:
-            port: 5000
+            port: &httpPort 8080
     persistence:
-      temp:
-        type: emptyDir
-        advancedMounts:
-          kitchenowl-web:
-            app:
-              - path: /var/cache/nginx
-                subPath: nginx-cache
-      run:
-        type: emptyDir
-        advancedMounts:
-          kitchenowl-web:
-            app:
-              - path: /run
-                subPath: run
       data:
         annotations:
           k8up.io/backup: "true"
@@ -87,7 +46,7 @@ spec:
         accessMode: ReadWriteOnce
         size: 5Gi
         advancedMounts:
-          kitchenowl-back:
+          kitchenowl-web:
             app:
               - path: /data
                 subPath: kitchenowl
