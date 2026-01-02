@@ -66,6 +66,13 @@ spec:
           tcp:
             port: 5000
     persistence:
+      temp:
+        type: emptyDir
+        advancedMounts:
+          kitchenowl-web:
+            app:
+              - path: /var/cache/nginx
+                subPath: nginx-cache
       data:
         annotations:
           k8up.io/backup: "true"
