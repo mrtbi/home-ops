@@ -8,7 +8,7 @@ resources:
   - ./code-server/ks.yaml
   - ./glance/ks.yaml
   - ./it-tools/ks.yaml
-  - ./karakeep/ks.yamli
+  - ./karakeep/ks.yaml
   - ./kitchenowl/ks.yaml
   - ./n8n/ks.yaml
   - ./papra/ks.yaml
