@@ -73,6 +73,13 @@ spec:
             app:
               - path: /var/cache/nginx
                 subPath: nginx-cache
+      run:
+        type: emptyDir
+        advancedMounts:
+          kitchenowl-web:
+            app:
+              - path: /run
+                subPath: run
       data:
         annotations:
           k8up.io/backup: "true"
