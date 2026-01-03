@@ -18,8 +18,23 @@ spec:
         containers:
           app:
             image:
-              repository: tombursch/kitchenowl
-              tag: v0.7.4@sha256:9d5e4402c2abc734e1536586caa103840a7ebe961fdce1570e31b956abeba70b
+              repository: tombursch/kitchenowl-web
+              tag: v0.7.4@sha256:70c4af1d2167fa29c3809e666a8307c279f31f869ec264e7866bea8979c808d0
+            env:
+              BACK_URL: kitchenowl-back.workloads.svc.cluster.local:5000
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 512Mi
+      kitchenowl-back:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: tombursch/kitchenowl-backend
+              tag: v0.7.4@sha256:c252c958a1f0709c22225996c8fc70b9cbe6d2b1f4676010bfcb0f3bbdd5b523
             env:
               JWT_SECRET_KEY:
                 valueFrom:
@@ -30,14 +45,19 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 1Gi
+                memory: 512Mi
     service:
       web:
         primary: true
         controller: kitchenowl-web
         ports:
           http:
-            port: &httpPort 8080
+            port: &httpPort 80
+      back:
+        controller: kitchenowl-back
+        ports:
+          tcp:
+            port: 5000
     persistence:
       data:
         annotations:
@@ -46,7 +66,7 @@ spec:
         accessMode: ReadWriteOnce
         size: 5Gi
         advancedMounts:
-          kitchenowl-web:
+          kitchenowl-back:
             app:
               - path: /data
                 subPath: kitchenowl
