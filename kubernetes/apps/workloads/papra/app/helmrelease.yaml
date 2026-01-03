@@ -35,6 +35,11 @@ spec:
                   secretKeyRef:
                     name: papra-secret
                     key: encryptionkey
+              AUTH_SECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: papra-secret
+                    key: authsecret
               TRUSTED_ORIGINS: "https://docs.mrtb.io"
             resources:
               requests:
