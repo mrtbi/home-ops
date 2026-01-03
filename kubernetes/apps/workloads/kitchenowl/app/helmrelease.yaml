@@ -40,7 +40,12 @@ spec:
                 valueFrom:
                   secretKeyRef:
                     name: kitchenowl-secret
-                    key: jwt-secret-key
+                    key: KITCHENOWL_JWT_SECRET_KEY
+              OPENAI_API_KEY:
+                valueFrom:
+                  secretKeyRef:
+                    name: kitchenowl-secret
+                    key: KITCHENOWL_OPENAI_API_KEY             
             resources:
               requests:
                 cpu: 100m
