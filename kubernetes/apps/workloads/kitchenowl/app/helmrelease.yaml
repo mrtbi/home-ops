@@ -41,6 +41,7 @@ spec:
                   secretKeyRef:
                     name: kitchenowl-secret
                     key: KITCHENOWL_JWT_SECRET_KEY
+              LLM_MODEL: "gpt-5-nano"
               OPENAI_API_KEY:
                 valueFrom:
                   secretKeyRef:
