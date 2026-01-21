@@ -3,8 +3,8 @@
 version: v1alpha1
 machine:
   ca:
-    crt: $MACHINE_CA_CRT
-    key: $MACHINE_CA_KEY
+    crt: {{ ENV.MACHINE_CA_CRT }}
+    key: {{ ENV.MACHINE_CA_KEY }}
   features:
     apidCheckExtKeyUsage: true
     diskQuotaSupport: true
@@ -25,7 +25,7 @@ machine:
     rbac: true
     stableHostname: true
   install:
-    image: factory.talos.dev/metal-installer/2d61dd07b20062062ea671b4d01873506103b67c0f7a4c3fb6cf4ee85585dcb8:v1.11.2 
+    image: factory.talos.dev/metal-installer/2d61dd07b20062062ea671b4d01873506103b67c0f7a4c3fb6cf4ee85585dcb8:v1.12.0
   kubelet:
     defaultRuntimeSeccompProfileEnabled: true
     disableManifestsDirectory: true
@@ -34,7 +34,7 @@ machine:
     extraConfig:
       maxPods: 150
       serializeImagePulls: false
-    image: ghcr.io/siderolabs/kubelet:v1.33.5
+    image: ghcr.io/siderolabs/kubelet:v1.34.2
     nodeIP:
       validSubnets:
         - 172.16.1.0/24
@@ -44,20 +44,18 @@ machine:
       - ip: 172.16.1.230
         aliases:
           - api.k8s.internal
-  token: $MACHINE_TOKEN
+  token: {{ ENV.MACHINE_TOKEN }}
   type: controlplane
 cluster:
   aggregatorCA:
-    crt: $CLUSTER_AGGREGATORCA_CRT
-    key: $CLUSTER_AGGREGATORCA_KEY
+    crt: {{ ENV.CLUSTER_AGGREGATORCA_CRT }}
+    key: {{ ENV.CLUSTER_AGGREGATORCA_KEY }}
   allowSchedulingOnControlPlanes: true
   apiServer:
-    image: registry.k8s.io/kube-apiserver:v1.33.5
+    image: registry.k8s.io/kube-apiserver:v1.34.2
     extraArgs:
       authentication-config: /system/config/kubernetes/authenticationconfiguration.yaml
       enable-aggregator-routing: "true"
-      feature-gates: MutatingAdmissionPolicy=true
-      runtime-config: admissionregistration.k8s.io/v1alpha1=true
     extraVolumes:
       - hostPath: /var/kubernetes/authenticationconfiguration.yaml
         mountPath: /system/config/kubernetes/authenticationconfiguration.yaml
@@ -68,10 +66,10 @@ cluster:
       - 127.0.0.1 # KubePrism
     disablePodSecurityPolicy: true
   ca:
-    crt: $CLUSTER_CA_CRT
-    key: $CLUSTER_CA_KEY
+    crt: {{ ENV.CLUSTER_CA_CRT }}
+    key: {{ ENV.CLUSTER_CA_KEY }}
   controllerManager:
-    image: registry.k8s.io/kube-controller-manager:v1.33.5
+    image: registry.k8s.io/kube-controller-manager:v1.34.2
     extraArgs:
       bind-address: 0.0.0.0
   controlPlane:
@@ -90,11 +88,11 @@ cluster:
     advertisedSubnets:
       - 172.16.1.0/24
     ca:
-      crt: $CLUSTER_ETCD_CA_CRT
-      key: $CLUSTER_ETCD_CA_KEY
+      crt: {{ ENV.CLUSTER_ETCD_CA_CRT }}
+      key: {{ ENV.CLUSTER_ETCD_CA_KEY }}
     extraArgs:
       listen-metrics-urls: http://0.0.0.0:2381
-  id: $CLUSTER_ID
+  id: {{ ENV.CLUSTER_ID }}
   network:
     cni:
       name: none
@@ -105,11 +103,11 @@ cluster:
       - 10.96.0.0/12
   proxy:
     disabled: true
-    image: registry.k8s.io/kube-proxy:v1.33.5
+    image: registry.k8s.io/kube-proxy:v1.34.2
   scheduler:
-    image: registry.k8s.io/kube-scheduler:v1.33.5
-  secret: $CLUSTER_SECRET
-  secretboxEncryptionSecret: $CLUSTER_SECRETBOXENCRYPTIONSECRET
+    image: registry.k8s.io/kube-scheduler:v1.34.2
+  secret: {{ ENV.CLUSTER_SECRET }}
+  secretboxEncryptionSecret: {{ ENV.CLUSTER_SECRETBOXENCRYPTIONSECRET }}
   serviceAccount:
-    key: $CLUSTER_SERVICEACCOUNT_KEY
-  token: $CLUSTER_TOKEN
+    key: {{ ENV.CLUSTER_SERVICEACCOUNT_KEY }}
+  token: {{ ENV.CLUSTER_TOKEN }}

@@ -10,8 +10,8 @@ metadata:
   name: infisical-secret
   namespace: external-secrets
 stringData:
-  clientId: ${INFISICAL_CLIENT_ID}
-  clientSecret: ${INFISICAL_CLIENT_SECRET}
+  clientId: {{ ENV.INFISICAL_CLIENT_ID }}
+  clientSecret: {{ ENV.INFISICAL_CLIENT_SECRET }}
 ---
 apiVersion: v1
 kind: Namespace
@@ -24,4 +24,4 @@ metadata:
   name: sops-age
   namespace: flux-system
 stringData:
-  age.agekey: ${FLUX_SOPS_PRIVATE_KEY}
+  age.agekey: {{ ENV.FLUX_SOPS_PRIVATE_KEY }}

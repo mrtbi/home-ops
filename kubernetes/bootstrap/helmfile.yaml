@@ -18,19 +18,25 @@ releases:
     version: 1.18.6
     values:
       - ../apps/kube-system/cilium/app/values.yaml
-    #hooks:
-    #  # Apply cilium network configuration
-    #  - events:
-    #      - postsync
-    #    command: kubectl
-    #    args:
-    #      - apply
-    #      - --namespace=kube-system
-    #      - --server-side
-    #      - --field-manager=kustomize-controller
-    #      - --kustomize
-    #      - ../apps/kube-system/cilium/config/
-    #    showlogs: true
+    hooks:
+      - events:
+          - postsync
+        command: bash
+        args:
+          - -c
+          - until kubectl get crd ciliumloadbalancerippools.cilium.io ciliumbgpadvertisements.cilium.io ciliumbgppeerconfigs.cilium.io ciliumbgpclusterconfigs.cilium.io &>/dev/null; do sleep 5; done
+        showlogs: true
+      - events:
+          - postsync
+        command: kubectl
+        args:
+          - apply
+          - --namespace=kube-system
+          - --server-side
+          - --field-manager=kustomize-controller
+          - --kustomize
+          - ../apps/kube-system/cilium/config/
+        showlogs: true
 
   - name: coredns
     namespace: kube-system
