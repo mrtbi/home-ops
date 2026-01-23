@@ -34,7 +34,7 @@ machine:
     extraConfig:
       maxPods: 150
       serializeImagePulls: false
-    image: ghcr.io/siderolabs/kubelet:v1.34.2
+    image: ghcr.io/siderolabs/kubelet:v1.35.0
     nodeIP:
       validSubnets:
         - 172.16.1.0/24
@@ -52,7 +52,7 @@ cluster:
     key: {{ ENV.CLUSTER_AGGREGATORCA_KEY }}
   allowSchedulingOnControlPlanes: true
   apiServer:
-    image: registry.k8s.io/kube-apiserver:v1.34.2
+    image: registry.k8s.io/kube-apiserver:v1.35.0
     extraArgs:
       authentication-config: /system/config/kubernetes/authenticationconfiguration.yaml
       enable-aggregator-routing: "true"
@@ -69,7 +69,7 @@ cluster:
     crt: {{ ENV.CLUSTER_CA_CRT }}
     key: {{ ENV.CLUSTER_CA_KEY }}
   controllerManager:
-    image: registry.k8s.io/kube-controller-manager:v1.34.2
+    image: registry.k8s.io/kube-controller-manager:v1.35.0
     extraArgs:
       bind-address: 0.0.0.0
   controlPlane:
@@ -103,9 +103,9 @@ cluster:
       - 10.96.0.0/12
   proxy:
     disabled: true
-    image: registry.k8s.io/kube-proxy:v1.34.2
+    image: registry.k8s.io/kube-proxy:v1.35.0
   scheduler:
-    image: registry.k8s.io/kube-scheduler:v1.34.2
+    image: registry.k8s.io/kube-scheduler:v1.35.0
   secret: {{ ENV.CLUSTER_SECRET }}
   secretboxEncryptionSecret: {{ ENV.CLUSTER_SECRETBOXENCRYPTIONSECRET }}
   serviceAccount:
