@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: k8up
-      version: 4.9.0
+      version: 4.10.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
