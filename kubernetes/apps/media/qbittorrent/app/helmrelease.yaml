@@ -42,12 +42,9 @@ spec:
               VPN_TYPE: wireguard
             nameOverride: gluetun
             securityContext:
-              allowPrivilegeEscalation: false
               capabilities:
                 add:
                   - NET_ADMIN
-              readOnlyRootFilesystem: true
-              runAsNonRoot: true
             resources:
               requests:
                 cpu: 50m
