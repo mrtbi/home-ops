@@ -41,6 +41,8 @@ spec:
               VPN_TYPE: wireguard
             nameOverride: gluetun
             securityContext:
+              runAsUser: 0
+              runAsGroup: 0
               capabilities:
                 add:
                   - NET_ADMIN
