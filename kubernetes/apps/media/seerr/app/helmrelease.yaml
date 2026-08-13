@@ -12,7 +12,7 @@ spec:
   values:
     image:
       tag: v3.4.1
-      sha: sha256:f4768de5f616248d723e05891f3345a1402123775d03bf0890dbfedc0831bda1
+      sha: f4768de5f616248d723e05891f3345a1402123775d03bf0890dbfedc0831bda1
     route:
       main:
         enabled: true
