@@ -45,9 +45,9 @@ spec:
               capabilities:
                 add:
                   - NET_ADMIN
-                readOnlyRootFilesystem: true
-                allowPrivilegeEscalation: false
-                runAsNonRoot: true
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              runAsNonRoot: true
             resources:
               requests:
                 cpu: 50m
@@ -99,17 +99,30 @@ spec:
       config:
         size: 1Gi
         accessMode: ReadWriteOnce
-        globalMounts:
-          - path: /config
+        advancedMounts:
+          qbittorrent:
+            fspermissions:
+              - path: /config
+            app:
+              - path: /config
       downloads:
         type: nfs
         path: /data/media
         server: iota.internal
-        globalMounts:
-          - path: /data/media/Downloads/qbittorrent
-            subPath: Downloads/qbittorrent
+        advancedMounts:
+          qbittorrent:
+            app: 
+              - path: /data/media/Downloads/qbittorrent
+                subPath: Downloads/qbittorrent
       tmp:
         type: emptyDir
+      tun:
+        type: hostPath
+        hostPath: /dev/net/tun
+        advancedMounts: 
+          qbittorrent:
+            vpn:
+              - path: /dev/net/tun
     route:
       app:
         hostnames:
