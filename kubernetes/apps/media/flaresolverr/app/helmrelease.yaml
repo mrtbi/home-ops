@@ -40,6 +40,11 @@ spec:
               capabilities:
                 drop:
                   - ALL
+    persistence: 
+      tmp:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 256Mi
     service:
       app:
         ports:
