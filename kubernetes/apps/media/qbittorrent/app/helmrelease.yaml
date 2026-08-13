@@ -18,8 +18,6 @@ spec:
           securityContext:
             fsGroup: 2000
             fsGroupChangePolicy: "OnRootMismatch"
-            runAsGroup: 2000
-            runAsUser: 2000
         initContainers:
           fspermissions:
             image:
@@ -86,6 +84,8 @@ spec:
               limits:
                 memory: 2Gi
             securityContext:
+              runAsGroup: 2000
+              runAsUser: 2000
               allowPrivilegeEscalation: false
               capabilities:
                 drop:
