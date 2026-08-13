@@ -19,8 +19,17 @@ spec:
             fsGroup: 2000
             fsGroupChangePolicy: "OnRootMismatch"
             runAsGroup: 2000
-            runAsNonRoot: true
             runAsUser: 2000
+        initContainers:
+          fspermissions:
+            image:
+              repository: docker.io/library/busybox
+              tag: latest
+            command: ['/bin/sh', '-c', 'chown -R 2000:2000 /config']
+            securityContext:
+              runAsUser: 0
+              runAsGroup: 0
+              readOnlyRootFilesystem: true
         containers:
           app:
             image:
@@ -70,12 +79,16 @@ spec:
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
+              runAsNonRoot: true
               capabilities:
                 drop:
                   - ALL
     persistence:
       config:
-        existingClaim: radarr-config
+        size: 1Gi
+        accessMode: ReadWriteOnce
+        globalMounts:
+          - path: /config
       media:
         type: nfs
         path: /data/media
