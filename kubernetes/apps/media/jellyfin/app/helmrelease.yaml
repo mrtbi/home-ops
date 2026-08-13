@@ -95,7 +95,7 @@ spec:
         advancedMounts:
           jellyfin:
             app:
-              - path: /data/nas-media/Library
+              - path: /data/media/Library
                 subPath: Library
       tmpfs:
         type: emptyDir
