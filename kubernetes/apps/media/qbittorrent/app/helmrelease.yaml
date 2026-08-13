@@ -94,7 +94,7 @@ spec:
         hostnames:
           - qbittorrent.mrtb.io
         parentRefs:
-          - name: envoy-internal
+          - name: gateway-internal
             namespace: network
         rules:
           - backendRefs:
