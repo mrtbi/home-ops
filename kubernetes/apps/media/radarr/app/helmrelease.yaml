@@ -94,7 +94,7 @@ spec:
         path: /data/media
         server: iota.internal
         globalMounts:
-          - path: /data/nas-media
+          - path: /data/media
       tmpfs:
         type: emptyDir
         globalMounts:
