@@ -19,7 +19,6 @@ spec:
             fsGroup: 2000
             fsGroupChangePolicy: "OnRootMismatch"
             runAsGroup: 2000
-            runAsNonRoot: true
             runAsUser: 2000
         initContainers:
           fspermissions:
@@ -74,14 +73,13 @@ spec:
                 drop:
                   - ALL
               readOnlyRootFilesystem: true
+              runAsNonRoot: true
     persistence:
       config:
         size: 1Gi
         accessMode: ReadWriteOnce
-        advancedMounts:
-          qbittorrent:
-            app:
-              - path: /config
+        globalMounts:
+          - path: /config
       downloads:
         type: nfs
         path: /data/media/downloads/qbittorrent
