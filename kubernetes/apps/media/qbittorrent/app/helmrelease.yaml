@@ -39,6 +39,7 @@ spec:
                   name: gluetun-secret
             env:
               VPN_TYPE: wireguard
+              FREE_ONLY: on
             nameOverride: gluetun
             securityContext:
               capabilities:
