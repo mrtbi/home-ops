@@ -64,7 +64,8 @@ spec:
                 memory: 4Gi
     persistence:
       config:
-        existingClaim: jellyfin
+        size: 1Gi
+        accessMode: ReadWriteOnce
         globalMounts:
           - path: /config
       metadata:
