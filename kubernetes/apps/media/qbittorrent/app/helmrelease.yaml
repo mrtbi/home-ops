@@ -39,6 +39,7 @@ spec:
                   name: gluetun-secret
             env:
               VPN_TYPE: wireguard
+              FIREWALL_OUTBOUND_SUBNETS: "10.244.0.0/16, 10.96.0.0/12"
             nameOverride: gluetun
             securityContext:
               runAsUser: 0
