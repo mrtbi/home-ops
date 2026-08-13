@@ -40,7 +40,13 @@ spec:
               capabilities:
                 drop:
                   - ALL
-    persistence: 
+    persistence:
+      local:
+        type: emptyDir
+        medium: Memory
+        sizeLimit: 64Mi
+        globalMounts:
+          - path: /.local
       tmp:
         type: emptyDir
         medium: Memory
