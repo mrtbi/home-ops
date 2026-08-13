@@ -35,24 +35,11 @@ spec:
                 memory: 512Mi
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
               runAsNonRoot: true
               capabilities:
                 drop:
                   - ALL
     persistence:
-      app:
-        type: emptyDir
-        medium: Memory
-        sizeLimit: 64Mi
-        globalMounts:
-          - path: /app/.local
-      local:
-        type: emptyDir
-        medium: Memory
-        sizeLimit: 64Mi
-        globalMounts:
-          - path: /.local
       tmp:
         type: emptyDir
         medium: Memory
