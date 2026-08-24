@@ -16,7 +16,7 @@ terraform {
   required_providers {
     infisical = {
       source  = "infisical/infisical"
-      version = "0.19.20"  
+      version = "0.19.24"  
     }
     proxmox = {
       source  = "bpg/proxmox"
