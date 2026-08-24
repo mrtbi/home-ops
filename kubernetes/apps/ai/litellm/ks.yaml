@@ -7,6 +7,7 @@ metadata:
 spec:
   components:
     - ../../../../components/dragonfly
+    - ../../../../components/postgres
   dependsOn:
     - name: dragonfly-operator
       namespace: database
@@ -22,6 +23,8 @@ spec:
   postBuild:
     substitute:
       APP: litellm
+      POSTGRES_INITDB_NAME: litellm
+      POSTGRES_INITDB_OWNER: litellm
   prune: true
   sourceRef:
     kind: GitRepository
