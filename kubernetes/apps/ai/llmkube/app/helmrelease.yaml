@@ -15,6 +15,13 @@ spec:
       install: true
       keep: true
     controllerManager:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: DoesNotExist
       replicaCount: 1
       leaderElection:
         enabled: false
@@ -52,10 +59,3 @@ spec:
       accessMode: ReadWriteOnce
       mountPath: /models
       annotations: {}
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: node-role.kubernetes.io/control-plane
-                  operator: DoesNotExist
