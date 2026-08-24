@@ -49,12 +49,12 @@ spec:
       valueFrom:
         secretKeyRef:
           name: litellm-secret
-          key: LITELLM_UI_USERNAME   
+          key: UI_USERNAME   
     - name: UI_PASSWORD
       valueFrom:
         secretKeyRef:
           name: litellm-secret
-          key: LITELLM_UI_PASSWORD
+          key: UI_PASSWORD
   resources:
     requests:
       cpu: 100m
