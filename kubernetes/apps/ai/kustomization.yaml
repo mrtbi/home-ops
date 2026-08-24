@@ -5,5 +5,13 @@ kind: Kustomization
 namespace: ai
 resources:
   - ./llmkube/ks.yaml
+patches:
+  - target:
+      kind: Namespace
+    patch: |
+      - op: add
+        path: /metadata/labels
+        value:
+          resource.kubernetes.io/admin-access: "true"
 components:
   - ../../components/namespace
