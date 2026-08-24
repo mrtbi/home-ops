@@ -10,7 +10,7 @@ spec:
     model: openai/kimi-k2.7-code
     apiBase: https://opencode.ai/zen/go/v1
     apiKeyRef:
-      name: litellm
+      name: litellm-secret
       key: OPENCODE_GO_API_KEY
     dropParams: true
   info:
