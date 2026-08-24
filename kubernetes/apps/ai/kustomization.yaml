@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: ai
 resources:
   - ./llmkube/ks.yaml
+  - ./litellm-operator/ks.yaml
   - ./open-webui/ks.yaml
 patches:
   - target:
