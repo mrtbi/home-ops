@@ -1,0 +1,7 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/siderolabs/talos/refs/heads/release-1.10/website/content/v1.10/schemas/config.schema.json
+machine:
+  type: worker
+  ca:
+    crt: {{ ENV.MACHINE_CA_CRT }}
+    key: ""

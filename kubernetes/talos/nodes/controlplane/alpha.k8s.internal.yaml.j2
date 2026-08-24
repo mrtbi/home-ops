@@ -1,6 +1,7 @@
 ---
 machine:
   install:
+    image: factory.talos.dev/metal-installer/{{ schematic }}:{{ talos_version }}
     diskSelector:
       model: TS240GMTS420S
   files:
@@ -27,22 +28,6 @@ machine:
       op: create
 ---
 apiVersion: v1alpha1
-kind: VolumeConfig
-name: EPHEMERAL
-provisioning:
-  maxSize: 80GiB
----
-# user-volume.patch.yaml
-apiVersion: v1alpha1
-kind: UserVolumeConfig
-name: PERSISTENT
-provisioning:
-  diskSelector:
-    match: system_disk
-  minSize: 100GiB
-  grow: true
----
-apiVersion: v1alpha1
 kind: HostnameConfig
 hostname: alpha.k8s.internal
 ---
@@ -50,8 +35,3 @@ apiVersion: v1alpha1
 kind: DHCPv4Config
 name: enp1s0
 clientIdentifier: mac
----
-apiVersion: v1alpha1
-kind: Layer2VIPConfig
-name: 172.16.1.230
-link: enp1s0

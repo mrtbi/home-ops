@@ -1,0 +1,78 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/siderolabs/talos/refs/heads/release-1.10/website/content/v1.10/schemas/config.schema.json
+version: v1alpha1
+machine:
+  ca:
+    crt: {{ ENV.MACHINE_CA_CRT }}
+  features:
+    apidCheckExtKeyUsage: true
+    diskQuotaSupport: true
+    hostDNS:
+      enabled: true
+      forwardKubeDNSToHost: false
+      resolveMemberNames: true
+    kubePrism:
+      enabled: true
+      port: 7445
+    rbac: true
+  kubelet:
+    defaultRuntimeSeccompProfileEnabled: true
+    disableManifestsDirectory: true
+    extraArgs:
+      rotate-server-certificates: "true"
+    extraConfig:
+      maxPods: 150
+      serializeImagePulls: false
+    image: ghcr.io/siderolabs/kubelet:{{ k8s_version }}
+    nodeIP:
+      validSubnets:
+        - 172.16.1.0/24
+  network:
+    disableSearchDomain: true
+  token: {{ ENV.MACHINE_TOKEN }}
+cluster:
+  id: {{ ENV.CLUSTER_ID }}
+  secret: {{ ENV.CLUSTER_SECRET }}
+  controlPlane:
+    endpoint: https://api.k8s.internal:6443
+  clusterName: main
+  network:
+    cni:
+      name: none
+    dnsDomain: cluster.local
+    podSubnets:
+      - 10.244.0.0/16
+    serviceSubnets:
+      - 10.96.0.0/12
+  token: {{ ENV.CLUSTER_TOKEN }}
+  ca:
+    crt: {{ ENV.CLUSTER_CA_CRT }}
+  discovery:
+    enabled: true
+    registries:
+      kubernetes:
+        disabled: true
+      service:
+        disabled: false
+---
+apiVersion: v1alpha1
+kind: StaticHostConfig
+name: 172.16.1.230
+hostnames:
+  - api.k8s.internal
+---
+apiVersion: v1alpha1
+kind: VolumeConfig
+name: EPHEMERAL
+provisioning:
+  maxSize: 80GiB
+---
+# user-volume.patch.yaml
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: PERSISTENT
+provisioning:
+  diskSelector:
+    match: system_disk
+  minSize: 100GiB
+  grow: true
