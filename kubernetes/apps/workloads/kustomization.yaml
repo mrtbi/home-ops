@@ -8,6 +8,7 @@ resources:
   - ./it-tools/ks.yaml
   - ./linkding/ks.yaml
   - ./unifi/ks.yaml
+  - ./searxng/ks.yaml
 components:
   - ../../components/namespace
   - ../../components/flux/alerts
