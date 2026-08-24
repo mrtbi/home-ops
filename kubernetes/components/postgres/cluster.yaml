@@ -1,0 +1,17 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: ${APP}-postgres
+spec:
+  instances: ${POSTGRES_REPLICAS:=1}
+  storage:
+    size: ${POSTGRES_STORAGE:=5}Gi
+  bootstrap:
+    initdb:
+      database: ${POSTGRES_INITDB_NAME:=app}
+      owner: ${POSTGRES_INITDB_OWNER:=app}Gi
+  logLevel: info
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "100m"
