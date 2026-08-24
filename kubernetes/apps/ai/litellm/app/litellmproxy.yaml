@@ -45,6 +45,16 @@ spec:
         secretKeyRef:
           name: litellm-secret
           key: LITELLM_MASTER_KEY
+    - name: UI_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: litellm-secret
+          key: LITELLM_UI_USERNAME   
+    - name: UI_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: litellm-secret
+          key: LITELLM_UI_PASSWORD
   resources:
     requests:
       cpu: 100m
