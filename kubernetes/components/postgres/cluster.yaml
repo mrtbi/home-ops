@@ -11,6 +11,13 @@ spec:
       database: ${POSTGRES_INITDB_NAME:=app}
       owner: ${POSTGRES_INITDB_OWNER:=app}Gi
   logLevel: info
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
   resources:
     requests:
       memory: "512Mi"
