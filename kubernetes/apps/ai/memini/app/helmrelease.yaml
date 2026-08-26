@@ -40,6 +40,7 @@ spec:
               MEMINI_EMBED_MODEL: qwen3-embedding
               MEMINI_EMBED_DIMS: "1024"
               MEMINI_EMBED_MAX_CONCURRENCY: "2"
+              MEMINI_EMBED_MAX_BATCH: "4"
               MEMINI_EMBED_QUERY_PREFIX: "Instruct: Given a user message, retrieve relevant past memories\nQuery: "
               MEMINI_LOG_FORMAT: json
               MEMINI_LLM_API: openai
