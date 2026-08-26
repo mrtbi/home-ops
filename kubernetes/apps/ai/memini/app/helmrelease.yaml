@@ -33,6 +33,7 @@ spec:
                     key: MEMINI_API_KEY
               MEMINI_BACKEND: sqlite
               MEMINI_DEFAULT_NAMESPACE: default
+              MEMINI_REQUEST_TIMEOUT: 180s
               MEMINI_DEDUP_SIMILARITY: "0.80"
               MEMINI_SHORT_TERM_CAP: "300"
               MEMINI_DEMOTE_AFTER: 1440h
