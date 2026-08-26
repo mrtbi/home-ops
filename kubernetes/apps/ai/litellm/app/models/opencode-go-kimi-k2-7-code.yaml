@@ -5,7 +5,7 @@ kind: LiteLLMModel
 metadata:
   name: opencode-go-kimi-k2-7-code
 spec:
-  modelName: opencode-go/kimi-k2.7-code
+  modelName: kimi-k2.7-code
   params:
     model: openai/kimi-k2.7-code
     apiBase: https://opencode.ai/zen/go/v1
