@@ -5,11 +5,11 @@ metadata:
 spec:
   instances: ${POSTGRES_REPLICAS:=1}
   storage:
-    size: ${POSTGRES_STORAGE:=5}Gi
+    size: ${POSTGRES_STORAGE:=1Gi}
   bootstrap:
     initdb:
       database: ${POSTGRES_INITDB_NAME:=app}
-      owner: ${POSTGRES_INITDB_OWNER:=app}Gi
+      owner: ${POSTGRES_INITDB_OWNER:=app}
   logLevel: info
   affinity:
     nodeAffinity:
