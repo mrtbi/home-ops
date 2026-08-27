@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
 - opencode-go-deepseek-v4-flash.yaml
 - opencode-go-glm-5-2.yaml
-- opencode-go-kimi-k2-6.yaml
+- opencode-go-glm-5-3-flash.yaml
 - opencode-go-kimi-k2-7-code.yaml
 - opencode-go-mimo-v2-5.yaml
 - opencode-go-minimax-m3.yaml
