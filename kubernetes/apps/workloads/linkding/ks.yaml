@@ -6,6 +6,8 @@ metadata:
   name: &appname linkding
   namespace: &namespace workloads
 spec:
+  components:
+    - ../../../../components/kopiur/backup
   targetNamespace: *namespace
   commonMetadata:
     labels:
@@ -13,6 +15,9 @@ spec:
   interval: 30m
   timeout: 5m
   path: "./kubernetes/apps/workloads/linkding/app"
+  postBuild:
+    substitute:
+      APP: linkding
   prune: true
   sourceRef:
     kind: GitRepository
