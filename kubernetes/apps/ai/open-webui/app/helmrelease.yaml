@@ -12,7 +12,7 @@ spec:
   values:
     controllers:
       open-webui:
-        replicas: 0
+        replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
@@ -49,12 +49,7 @@ spec:
                 memory: 2Gi
     persistence:
       config:
-        enabled: true
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 10Gi
-        globalMounts:
-          - path: /app/backend/data
+        existingClaim: open-webui
     route:
       app:
         hostnames:
