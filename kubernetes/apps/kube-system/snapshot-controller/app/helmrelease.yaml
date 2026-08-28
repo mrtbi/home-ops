@@ -13,6 +13,6 @@ spec:
     controller:
       replicaCount: 1
       serviceMonitor:
-        create: true
+        create: false
     webhook:
       enabled: false
