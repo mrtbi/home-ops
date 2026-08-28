@@ -12,7 +12,7 @@ spec:
   values:
     controllers:
       linkding:
-        replicas: 0
+        replicas: 1
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
@@ -70,11 +70,7 @@ spec:
       tmp:
         type: emptyDir
       data:
-        annotations:
-          k8up.io/backup: "true"
-        type: persistentVolumeClaim
-        accessMode: ReadWriteOnce
-        size: 10Gi
+        existingClaim: linkding
         globalMounts:
           - path: /etc/linkding/data
     route:
