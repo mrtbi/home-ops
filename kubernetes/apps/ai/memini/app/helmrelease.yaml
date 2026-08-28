@@ -13,7 +13,7 @@ spec:
     controllers:
       main:
         type: deployment
-        replicas: 0
+        replicas: 1
         annotations:
           reloader.stakater.com/auto: "true"
         pod:
@@ -78,6 +78,9 @@ spec:
                   secretKeyRef:
                     name: memini-secret
                     key: MEMINI_API_KEY
+    persistence:
+      data:
+        existingClaim: memini
     route:
       ui:
         enabled: true
