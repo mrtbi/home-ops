@@ -13,3 +13,6 @@ spec:
     controller:
       excludedNamespaces:
         - kguardian
+    db:
+      persistence:
+        existingClaim: kguardian-db
