@@ -55,7 +55,7 @@ spec:
     modelCache:
       enabled: true
       size: 100Gi
-      storageClass: miroir-replicated
+      storageClass: miroir-local
       accessMode: ReadWriteOnce
       mountPath: /models
       annotations: {}

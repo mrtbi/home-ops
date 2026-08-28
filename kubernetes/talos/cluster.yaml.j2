@@ -21,12 +21,25 @@ machine:
     extraArgs:
       rotate-server-certificates: "true"
     extraConfig:
-      maxPods: 150
+      crashLoopBackOff:
+        maxContainerRestartPeriod: 60s
+      imageMaximumGCAge: 168h
+      maxParallelImagePulls: 3
+      maxPods: 200
       serializeImagePulls: false
+      shutdownGracePeriod: 120s
+      shutdownGracePeriodCriticalPods: 60s
     image: ghcr.io/siderolabs/kubelet:{{ k8s_version }}
     nodeIP:
       validSubnets:
         - 172.16.1.0/24
+  kernel:
+    modules:
+      - name: drbd
+        parameters:
+          - usermode_helper=disabled
+      - name: drbd_transport_tcp
+      - name: dm_thin_pool
   network:
     disableSearchDomain: true
   token: {{ ENV.MACHINE_TOKEN }}
@@ -66,13 +79,3 @@ kind: VolumeConfig
 name: EPHEMERAL
 provisioning:
   maxSize: 80GiB
----
-# user-volume.patch.yaml
-apiVersion: v1alpha1
-kind: UserVolumeConfig
-name: PERSISTENT
-provisioning:
-  diskSelector:
-    match: system_disk
-  minSize: 100GiB
-  grow: true

@@ -4,28 +4,6 @@ machine:
     image: factory.talos.dev/metal-installer/{{ schematic }}:{{ talos_version }}
     diskSelector:
       model: TS240GMTS420S
-  files:
-    - content: |
-        apiVersion: apiserver.config.k8s.io/v1beta1
-        kind: AuthenticationConfiguration
-        jwt:
-        - issuer:
-            url: https://auth.mrtb.io
-            audiences:
-            - {{ ENV.AUTH_CLIENT_ID }}
-          claimMappings:
-            username:
-              claim: preferred_username
-              prefix: "oidc:"
-            groups:
-              claim: groups
-              prefix: "oidc:"
-          userValidationRules:
-          - expression: "!user.username.startsWith('system:')"
-            message: "username cannot use reserved system: prefix"
-      permissions: 0o644
-      path: /var/kubernetes/authenticationconfiguration.yaml
-      op: create
 ---
 apiVersion: v1alpha1
 kind: HostnameConfig
@@ -35,3 +13,12 @@ apiVersion: v1alpha1
 kind: DHCPv4Config
 name: enp1s0
 clientIdentifier: mac
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: PERSISTENT
+provisioning:
+  diskSelector:
+    match: system_disk
+  minSize: 10GB
+  maxSize: 10GB
