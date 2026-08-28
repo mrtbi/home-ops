@@ -25,6 +25,7 @@ spec:
       APP: litellm
       POSTGRES_INITDB_NAME: litellm
       POSTGRES_INITDB_OWNER: litellm
+      POSTGRES_STORAGE: 5Gi
   prune: true
   sourceRef:
     kind: GitRepository
