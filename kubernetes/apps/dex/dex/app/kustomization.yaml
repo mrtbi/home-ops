@@ -5,12 +5,5 @@ kind: Kustomization
 resources:
   - ./externalsecret.yaml
   - ./httproute.yaml
-  - ./pvc.yaml
   - ./helmrepository.yaml
   - ./helmrelease.yaml
-configMapGenerator:
-  - name: dex-helm-values
-    files:
-      - values.yaml=./values.yaml
-configurations:
-  - kustomizeconfig.yaml
