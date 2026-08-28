@@ -5,8 +5,14 @@ kind: Kustomization
 metadata:
   name: memini
 spec:
+  components:
+    - ../../../../components/kopiur/backup
   interval: 1h
   path: "./kubernetes/apps/ai/memini/app"
+  postBuild:
+    substitute:
+      APP: memini
+      KOPIUR_CAPACITY: 5Gi
   prune: true
   sourceRef:
     kind: GitRepository
