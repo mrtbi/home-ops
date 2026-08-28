@@ -5,6 +5,6 @@ metadata:
   name: alpha
 spec:
   pools:
-    - name: default
+    - name: local-alpha
       loopfile:
         baseDir: /var/mnt/PERSISTENT/miroir
