@@ -6,6 +6,8 @@ metadata:
   name: &appname unifi-controller
   namespace: &namespace workloads
 spec:
+  components:
+    - ../../../../components/kopiur/backup
   targetNamespace: *namespace
   commonMetadata:
     labels:
@@ -13,6 +15,9 @@ spec:
   interval: 30m
   timeout: 5m
   path: "./kubernetes/apps/workloads/unifi/app"
+  postBuild:
+    substitute:
+      APP: unifi
   prune: true
   sourceRef:
     kind: GitRepository
