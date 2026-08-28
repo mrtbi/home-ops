@@ -12,7 +12,6 @@ set shell := ['bash', '-euo', 'pipefail', '-c']
 mod k8s-bootstrap "kubernetes/bootstrap"
 mod k8s "kubernetes"
 mod talos "kubernetes/talos"
-mod proxmoxtf "terraform/stacks/proxmox"
 
 [private]
 default:

@@ -26,6 +26,11 @@ dashboard node:
 upgrade-k8s version *args:
     talosctl -n {{ controller }} upgrade-k8s --to {{ version }} {{ args }}
 
+[confirm('Upgrade node ' + node + ' [y|N] ?')]
+[doc('Upgrade Talos version on a node')]
+upgrade-node node *args:
+    talosctl -n "{{ node }}" upgrade -i "$(just talos machine-image "{{ node }}")" -m powercycle --timeout=10m {{ args }}
+
 [doc('Render Talos config for a node')]
 render-config node:
     export SCHEMATIC="$(just talos schematic-id "{{ node }}")"
@@ -65,3 +70,10 @@ schematic-file node="":
 
 schematic-id node="":
     curl -sX POST --data-binary @<(just template "$(just talos schematic-file "{{ node }}")") "https://factory.talos.dev/schematics" | jq -r '.id'
+
+machine-image node="":
+    export NODE="{{ node }}"
+    if [[ -z "${NODE}" ]]; then
+        NODE="$(talosctl config info -o yaml | yq -r -e '.nodes[0]')"
+    fi
+    just talos render-config delta.k8s.internal | yq -r -e 'select(.machine) | .machine.install.image'

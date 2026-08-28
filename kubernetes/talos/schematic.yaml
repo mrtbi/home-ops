@@ -1,5 +1,6 @@
----
 customization:
-  systemExtensions:
-    officialExtensions:
-      - siderolabs/intel-ucode
+    systemExtensions:
+        officialExtensions:
+          - siderolabs/drbd
+          - siderolabs/i915
+          - siderolabs/intel-ucode
