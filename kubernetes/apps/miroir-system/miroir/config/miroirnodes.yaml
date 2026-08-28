@@ -1,0 +1,10 @@
+---
+apiVersion: miroir.home-operations.com/v1alpha1
+kind: MiroirNode
+metadata:
+  name: alpha
+spec:
+  pools:
+    - name: default
+      loopfile:
+        baseDir: /var/mnt/PERSISTENT/miroir
