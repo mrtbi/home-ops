@@ -23,7 +23,7 @@ spec:
   postBuild:
     substitute:
       APP: litellm
-      POSTGRES_REPLICAS: "0"
+      POSTGRES_REPLICAS: "1"
       POSTGRES_INITDB_NAME: litellm
       POSTGRES_INITDB_OWNER: litellm
       POSTGRES_STORAGE: 5Gi
