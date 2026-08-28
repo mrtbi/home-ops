@@ -2,6 +2,8 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: ${APP}-postgres
+  annotations:
+    cnpg.io/hibernation: on
 spec:
   instances: ${POSTGRES_REPLICAS:=1}
   storage:
