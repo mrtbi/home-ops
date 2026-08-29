@@ -22,6 +22,7 @@ spec:
               tag: 0.37.0-nonroot@ sha256:73c176f288bdc2586341606204f1e5e8ea7ce514d8431fd479c010065c24dd71 
             env:
               HEADROOM_COMPRESS_ALLOW_REMOTE: 1
+              HEADROOM_COMPRESS_USER_MESSAGES: 1
             envFrom:
               - secretRef:
                   name: headroom-secret
