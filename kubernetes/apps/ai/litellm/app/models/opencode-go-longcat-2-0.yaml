@@ -2,11 +2,11 @@
 apiVersion: litellm.home-operations.com/v1alpha1
 kind: LiteLLMModel
 metadata:
-  name: opencode-go-mimo-v2-5
+  name: opencode-go-longcat-2-0
 spec:
-  modelName: opencode-go/mimo-v2.5
+  modelName: opencode-go/longcat-2.0
   params:
-    model: openai/mimo-v2.5
+    model: openai/longcat-2.0
     apiBase: https://opencode.ai/zen/go/v1
     apiKeyRef:
       name: litellm-secret
@@ -14,12 +14,12 @@ spec:
     dropParams: true
   info:
     maxInputTokens: 1048576
-    maxOutputTokens: 131072
+    maxOutputTokens: 262144
     supportsFunctionCalling: true
     supportsPromptCaching: true
     extra:
       supports_reasoning: true
-      supports_vision: true
-      input_cost_per_token: 0.00000014
-      output_cost_per_token: 0.00000028
-      cache_read_input_token_cost: 0.0000000028
+      supports_vision: false
+      input_cost_per_token: 0.0000003
+      output_cost_per_token: 0.0000012
+      cache_read_input_token_cost: 0.000000006

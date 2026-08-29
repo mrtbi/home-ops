@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://k8s-schemas.home-operations.com/litellm.home-operations.com/litellmmodel_v1alpha1.json
 apiVersion: litellm.home-operations.com/v1alpha1
 kind: LiteLLMModel
@@ -14,11 +13,13 @@ spec:
       key: OPENCODE_GO_API_KEY
     dropParams: true
   info:
-    maxInputTokens: 1048560
+    maxInputTokens: 1048576
     maxOutputTokens: 131072
     supportsFunctionCalling: true
     supportsPromptCaching: true
     extra:
       supports_reasoning: true
+      supports_vision: true
       input_cost_per_token: 0.00000015
-      output_cost_per_token: 0.00000050
+      output_cost_per_token: 0.0000005
+      cache_read_input_token_cost: 0.00000003

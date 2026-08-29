@@ -2,24 +2,24 @@
 apiVersion: litellm.home-operations.com/v1alpha1
 kind: LiteLLMModel
 metadata:
-  name: opencode-go-mimo-v2-5
+  name: opencode-go-hy3
 spec:
-  modelName: opencode-go/mimo-v2.5
+  modelName: opencode-go/hy3
   params:
-    model: openai/mimo-v2.5
+    model: openai/hy3
     apiBase: https://opencode.ai/zen/go/v1
     apiKeyRef:
       name: litellm-secret
       key: OPENCODE_GO_API_KEY
     dropParams: true
   info:
-    maxInputTokens: 1048576
+    maxInputTokens: 262144
     maxOutputTokens: 131072
     supportsFunctionCalling: true
     supportsPromptCaching: true
     extra:
       supports_reasoning: true
-      supports_vision: true
+      supports_vision: false
       input_cost_per_token: 0.00000014
-      output_cost_per_token: 0.00000028
-      cache_read_input_token_cost: 0.0000000028
+      output_cost_per_token: 0.00000058
+      cache_read_input_token_cost: 0.000000035

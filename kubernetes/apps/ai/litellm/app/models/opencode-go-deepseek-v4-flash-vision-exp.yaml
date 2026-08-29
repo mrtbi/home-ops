@@ -2,11 +2,11 @@
 apiVersion: litellm.home-operations.com/v1alpha1
 kind: LiteLLMModel
 metadata:
-  name: opencode-go-mimo-v2-5
+  name: opencode-go-deepseek-v4-flash-vision-exp
 spec:
-  modelName: opencode-go/mimo-v2.5
+  modelName: opencode-go/deepseek-v4-flash-vision-exp
   params:
-    model: openai/mimo-v2.5
+    model: openai/deepseek-v4-flash-vision-exp
     apiBase: https://opencode.ai/zen/go/v1
     apiKeyRef:
       name: litellm-secret
@@ -20,6 +20,6 @@ spec:
     extra:
       supports_reasoning: true
       supports_vision: true
-      input_cost_per_token: 0.00000014
-      output_cost_per_token: 0.00000028
-      cache_read_input_token_cost: 0.0000000028
+      input_cost_per_token: 0.00000022
+      output_cost_per_token: 0.00000066
+      cache_read_input_token_cost: 0.000000007
