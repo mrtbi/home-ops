@@ -15,15 +15,6 @@ name: eno1
 clientIdentifier: mac
 ---
 apiVersion: v1alpha1
-kind: UserVolumeConfig
-name: PERSISTENT
-provisioning:
-  diskSelector:
-    match: system_disk
-  minSize: 1GB
-  maxSize: 1GB
----
-apiVersion: v1alpha1
 kind: RawVolumeConfig
 name: miroir
 provisioning:
