@@ -1,0 +1,61 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: headroom
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: headroom
+  interval: 30m
+  values:
+    controllers:
+      headroom:
+        replicas: 1
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/headroomlabs-ai/headroom
+              tag: 0.37.0-nonroot@ sha256:73c176f288bdc2586341606204f1e5e8ea7ce514d8431fd479c010065c24dd71 
+            env:
+              HEADROOM_COMPRESS_ALLOW_REMOTE: 1
+            envFrom:
+              - secretRef:
+                  name: headroom-secret
+            resources:
+              requests:
+                cpu: 100m
+              limits:
+                memory: 2Gi
+    persistence:
+      workspace:
+        enabled: true
+        type: persistentVolumeClaim
+        size: 5Gi
+        storageClass: miroir-no-replica
+        accessMode: ReadWriteOnce
+        globalMounts:
+          - path: /workspace
+    route:
+      app:
+        hostnames:
+          - headroom.mrtb.io
+        parentRefs:
+          - name: gateway-internal
+            namespace: network
+    service:
+      app:
+        ports:
+          http:
+            port: 8787
+    defaultPodOptions:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: DoesNotExist
