@@ -20,3 +20,4 @@ patches:
           resource.kubernetes.io/admin-access: "true"
 components:
   - ../../components/namespace
+  - ../../components/kopiur/secret
