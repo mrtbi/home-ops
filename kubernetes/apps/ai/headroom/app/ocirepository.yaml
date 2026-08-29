@@ -3,7 +3,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: OCIRepository
 metadata:
-  name: open-webui
+  name: headroom
 spec:
   interval: 15m
   layerSelector:
