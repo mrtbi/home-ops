@@ -19,6 +19,8 @@ spec:
     substitute:
       APP: unifi
       KOPIUR_CAPACITY: 1Gi
+      KOPIUR_MOVER_UID: "999"
+      KOPIUR_MOVER_GID: "999"
   prune: true
   sourceRef:
     kind: GitRepository
