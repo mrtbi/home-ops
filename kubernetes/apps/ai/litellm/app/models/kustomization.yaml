@@ -25,3 +25,4 @@ resources:
   - ./opencode-go-qwen3-7-max.yaml
   - ./opencode-go-qwen3-7-plus.yaml
   - ./opencode-go-qwen3-6-plus.yaml
+  - ./hetzner-qwen-3-8-27b.yaml
