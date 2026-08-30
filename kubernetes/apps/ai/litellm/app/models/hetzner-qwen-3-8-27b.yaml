@@ -6,7 +6,7 @@ metadata:
 spec:
   modelName: hetzner/Qwen3.8-27B
   params:
-    model: Qwen3.8-27B
+    model: openai/Qwen3.8-27B
     apiBase: https://inference.hetzner.com/api/v1
     dropParams: true
   info:
