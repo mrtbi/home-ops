@@ -22,6 +22,12 @@ spec:
       hostRoot: /sys/fs/cgroup
     devices: "enp1s0,eno1"
     enableIPv4BIGTCP: true
+    hubble:
+      enabled: true
+      relay:
+        enabled: true
+      ui:
+        enabled: true
     ipam:
       mode: kubernetes
     ipv4NativeRoutingCIDR: 10.244.0.0/16
