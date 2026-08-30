@@ -62,6 +62,8 @@ spec:
       trustedCIDRs:
         - 10.244.0.0/16
   http2:
+    initialStreamWindowSize: 16Mi
+    initialConnectionWindowSize: 32Mi
     onInvalidMessage: TerminateStream
   http3: {}
   proxyProtocol:
