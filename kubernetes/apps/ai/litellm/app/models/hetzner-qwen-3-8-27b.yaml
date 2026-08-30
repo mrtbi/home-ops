@@ -8,6 +8,9 @@ spec:
   params:
     model: openai/Qwen3.8-27B
     apiBase: https://inference.hetzner.com/api/v1
+    apiKeyRef:
+      name: litellm-secret
+      key: HETZNER_INFERENCE_API_KEY
     dropParams: true
   info:
     maxInputTokens: 1000000
