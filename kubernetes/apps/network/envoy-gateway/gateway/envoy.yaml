@@ -5,6 +5,11 @@ kind: EnvoyProxy
 metadata:
   name: envoy
 spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyService:
+        externalTrafficPolicy: Cluster
   logging:
     level:
       default: info
